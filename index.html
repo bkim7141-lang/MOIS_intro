@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>행정안전부 알리미 | 한눈에 만나는 행안부의 주요 업무</title>
+  <!-- Google Fonts & Lucide Icons CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="header">
+    <div class="header-container">
+      <a href="#" class="logo-area">
+        <img src="mois_logo4.png" alt="대한민국 정부 행정안전부 로고" class="header-logo-img">
+        <div class="logo-text">
+          <span class="sub-title">국민이 안전하고 살기 좋은 나라</span>
+          <span class="main-title">행정안전부 쉽게 알기</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="#quiz">재미있는 퀴즈</a>
+        <a href="#about">행안부란?</a>
+        <a href="#core-duties">5대 핵심업무</a>
+        <a href="#life-services">내 생활 속 서비스</a>
+        <a href="#faq">자주 묻는 질문</a>
+      </nav>
+      <div class="header-action">
+        <button type="button" id="themeToggle" class="btn-theme-toggle" aria-label="야간 모드 전환" title="야간 모드 전환">
+          <i data-lucide="moon" class="theme-icon-moon"></i>
+          <i data-lucide="sun" class="theme-icon-sun"></i>
+        </button>
+        <a href="https://www.mois.go.kr" target="_blank" rel="noopener noreferrer" class="btn-portal">
+          <span>공식 포털 바로가기</span>
+          <i data-lucide="external-link"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">
+        <i data-lucide="shield-check"></i>
+        <span>국민 안전 &middot; 정부 혁신 &middot; 균형 발전</span>
+      </div>
+      <h1 class="hero-title">
+        대한민국의 든든한 일상, <span class="gradient-text">행정안전부</span>가 함께 만듭니다.
+      </h1>
+      <p class="hero-desc">
+        재난 안전 관리부터 편리한 정부24, 지방 균형발전까지!<br>
+        어렵게만 느껴졌던 국가 행정, 일반 시민의 눈높이에서 알기 쉽게 소개해 드립니다.
+      </p>
+      <div class="hero-search-box">
+        <i data-lucide="search" class="search-icon"></i>
+        <input type="text" id="serviceSearch" placeholder="궁금한 업무나 서비스를 검색해보세요 (예: 주민등록, 재난문자, 정부24)">
+        <button type="button" id="btnSearch" class="btn-search">검색</button>
+      </div>
+      <div class="hero-quick-tags">
+        <span>추천 검색어:</span>
+        <button class="quick-tag" onclick="filterSearch('안전')">#재난안전</button>
+        <button class="quick-tag" onclick="filterSearch('디지털')">#디지털정부</button>
+        <button class="quick-tag" onclick="filterSearch('지방')">#지방시대</button>
+        <button class="quick-tag" onclick="filterSearch('정부24')">#정부24</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: 재미있는 상식 & 1분 퀴즈 (Interactive Quiz - 상단 배치) -->
+  <section id="quiz" class="section quiz-section">
+    <div class="container">
+      <div class="quiz-wrapper">
+        <div class="quiz-intro">
+          <span class="section-badge">재미있는 상식</span>
+          <h2>행안부 1분 퀴즈 챌린지! 💡</h2>
+          <p>알아두면 유익한 행정안전부 상식, 몇 개나 맞힐 수 있을까요?</p>
+          <div class="quiz-score-badge" id="quizScore">점수: 0 / 3</div>
+        </div>
+
+        <div class="quiz-box">
+          <!-- Quiz Item 1 -->
+          <div class="quiz-card" data-quiz="1">
+            <span class="quiz-num">Q1</span>
+            <h4 class="quiz-question">우리 동네 파손된 도로(포트홀)나 불법 주정차를 신고할 수 있는 행정안전부의 공식 앱은?</h4>
+            <div class="quiz-options">
+              <button class="opt-btn" onclick="checkAnswer(1, 0, false)">① 민원 24 앱</button>
+              <button class="opt-btn" onclick="checkAnswer(1, 1, true)">② 안전신문고 앱</button>
+              <button class="opt-btn" onclick="checkAnswer(1, 2, false)">③ 도로교통 앱</button>
+            </div>
+            <div class="quiz-feedback" id="feedback-1"></div>
+          </div>
+
+          <!-- Quiz Item 2 -->
+          <div class="quiz-card" data-quiz="2">
+            <span class="quiz-num">Q2</span>
+            <h4 class="quiz-question">고향사랑기부제에 10만 원을 기부할 경우 받을 수 있는 세액공제 혜택은 얼마일까요?</h4>
+            <div class="quiz-options">
+              <button class="opt-btn" onclick="checkAnswer(2, 0, false)">① 5만 원</button>
+              <button class="opt-btn" onclick="checkAnswer(2, 1, false)">② 8만 원</button>
+              <button class="opt-btn" onclick="checkAnswer(2, 2, true)">③ 10만 원 전액</button>
+            </div>
+            <div class="quiz-feedback" id="feedback-2"></div>
+          </div>
+
+          <!-- Quiz Item 3 -->
+          <div class="quiz-card" data-quiz="3">
+            <span class="quiz-num">Q3</span>
+            <h4 class="quiz-question">네이버나 카카오톡으로 건강검진일과 교통과태료 납부일을 미리 알려주는 서비스 이름은?</h4>
+            <div class="quiz-options">
+              <button class="opt-btn" onclick="checkAnswer(3, 0, true)">① 국민비서 (구삐)</button>
+              <button class="opt-btn" onclick="checkAnswer(3, 1, false)">② 알림e</button>
+              <button class="opt-btn" onclick="checkAnswer(3, 2, false)">③ 전자행정 톡톡</button>
+            </div>
+            <div class="quiz-feedback" id="feedback-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: 행안부는 어떤 곳인가요? (About) -->
+  <section id="about" class="section about-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-badge">기관 소개</span>
+        <h2>행정안전부는 어떤 일을 하나요?</h2>
+        <p>국가 행정의 안방마님이자 국민의 든든한 보호막, 행정안전부를 한 문장으로 정리해 드립니다.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="icon-wrap bg-blue">
+            <i data-lucide="shield"></i>
+          </div>
+          <h3>국민의 생명과 안전 보호</h3>
+          <p>태풍, 지진, 화재 등 각종 재난과 사고로부터 국민을 지키는 <strong>국가 재난·안전 총괄 컨트롤타워</strong> 역할을 수행합니다.</p>
+        </div>
+        <div class="about-card">
+          <div class="icon-wrap bg-teal">
+            <i data-lucide="sparkles"></i>
+          </div>
+          <h3>더 똑똑하고 편한 디지털 정부</h3>
+          <p>종이 서류 없는 대한민국! <strong>정부24, 모바일 신분증</strong> 등을 구축하여 클릭 한 번으로 모든 행정 서비스를 이용할 수 있게 합니다.</p>
+        </div>
+        <div class="about-card">
+          <div class="icon-wrap bg-amber">
+            <i data-lucide="map-pin"></i>
+          </div>
+          <h3>어디서나 살기 좋은 지방시대</h3>
+          <p>수도권뿐 아니라 전국 모든 지역이 활력 있게 살아날 수 있도록 <strong>지방재정과 자치분권</strong>을 지원하고 격차를 줄입니다.</p>
+        </div>
+        <div class="about-card">
+          <div class="icon-wrap bg-indigo">
+            <i data-lucide="landmark"></i>
+          </div>
+          <h3>일 잘하는 혁신 정부 운영</h3>
+          <p>정부 부처 조직관리, 공직사회 혁신, 국경일 의전 행사 등을 주관하며 <strong>투명하고 신뢰받는 정부</strong>를 운영합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: 5대 핵심 업무 집중 탐구 (Core Duties) -->
+  <section id="core-duties" class="section duties-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">핵심 업무</span>
+        <h2>행정안전부의 5대 핵심 업무</h2>
+        <p>클릭하여 각 영역별 세부 정책과 실제 국민 생활 변화를 확인해보세요.</p>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="duty-tabs">
+        <button class="tab-btn active" data-tab="tab-safety">
+          <i data-lucide="life-buoy"></i>
+          <span>재난 및 안전관리</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-digital">
+          <i data-lucide="smartphone"></i>
+          <span>디지털 정부 혁신</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-local">
+          <i data-lucide="compass"></i>
+          <span>지방자치 및 균형발전</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-finance">
+          <i data-lucide="coins"></i>
+          <span>지방재정 및 지방세</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-org">
+          <i data-lucide="network"></i>
+          <span>정부조직 및 행정관리</span>
+        </button>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div class="tab-contents">
+        <!-- TAB 1: 재난 및 안전관리 -->
+        <div class="tab-panel active" id="tab-safety">
+          <div class="panel-inner">
+            <div class="panel-desc">
+              <span class="panel-tag">Safety First</span>
+              <h3>국민의 일상을 안전하게, 재난 대응 총괄</h3>
+              <p>자연재난(호우, 지진, 대설 등)과 사회재난(화재, 교통사고, 인파 밀집 등)을 24시간 감시하고 신속하게 대응합니다. 국민행동요령 보급과 안전점검으로 사고를 사전에 예방합니다.</p>
+              
+              <div class="duty-features">
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="radio"></i></div>
+                  <div>
+                    <h4>긴급재난문자 & 안전신문고</h4>
+                    <p>위험 상황 시 즉각 재난문자 발송, 생활 속 위험 요소는 시민이 '안전신문고' 앱으로 직접 신고하고 해결합니다.</p>
+                  </div>
+                </div>
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="umbrella"></i></div>
+                  <div>
+                    <h4>풍수해 보험 및 재난지원금</h4>
+                    <p>피해 발생 시 신속한 복구 지원과 취약계층 재난 예방 시설 개선 사업을 추진합니다.</p>
+                  </div>
+                </div>
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="heart-pulse"></i></div>
+                  <div>
+                    <h4>어린이·보행자 교통안전</h4>
+                    <p>어린이 보호구역 정비, 보행자 우선도로 지정 등 보행 취약계층의 안심 환경을 조성합니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-visual">
+              <div class="visual-card safety-theme">
+                <div class="visual-badge">현장 핫이슈</div>
+                <h4>안전신문고로 바뀐 우리 동네</h4>
+                <p>포트홀, 불법 주정차, 소화전 막힘 등 신고 1건이 대형 사고를 막습니다.</p>
+                <div class="stat-boxes">
+                  <div class="stat-box">
+                    <span class="stat-num">700만+</span>
+                    <span class="stat-label">연간 안전신고 접수</span>
+                  </div>
+                  <div class="stat-box">
+                    <span class="stat-num">95%</span>
+                    <span class="stat-label">조치 완료율</span>
+                  </div>
+                </div>
+                <a href="https://www.safetyreport.go.kr" target="_blank" class="mini-btn">안전신문고 둘러보기 &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: 디지털 정부 혁신 -->
+        <div class="tab-panel" id="tab-digital">
+          <div class="panel-inner">
+            <div class="panel-desc">
+              <span class="panel-tag">Digital Korea</span>
+              <h3>종이 없는 세상, 스마트한 디지털플랫폼정부</h3>
+              <p>주민등록등본 떼러 동주민센터 가던 시절은 이제 그만! 전 세계가 벤치마킹하는 대한민국 디지털정부의 중심에 행정안전부가 있습니다.</p>
+              
+              <div class="duty-features">
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="laptop"></i></div>
+                  <div>
+                    <h4>정부24 (Gov.kr)</h4>
+                    <p>각종 민원 발급부터 원스톱 보조금 신청(보조금24)까지 대한민국 공공서비스를 한 곳에서 해결합니다.</p>
+                  </div>
+                </div>
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="badge-check"></i></div>
+                  <div>
+                    <h4>모바일 신분증</h4>
+                    <p>지갑 없이 스마트폰에 안전하게 담는 모바일 운전면허증, 국가보훈등록증, 주민등록증을 보급합니다.</p>
+                  </div>
+                </div>
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="cpu"></i></div>
+                  <div>
+                    <h4>공공 데이터 개방 및 AI 행정</h4>
+                    <p>공공데이터포털(data.go.kr)을 통해 유용한 공공데이터를 민간에 개방하여 혁신 서비스 창출을 지원합니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-visual">
+              <div class="visual-card digital-theme">
+                <div class="visual-badge">디지털 혁신</div>
+                <h4>손안의 행정비서 '국민비서 구삐'</h4>
+                <p>건강검진일, 세금 납부 기한, 백신 접종까지 네이버&middot;카카오톡으로 잊지 않게 미리 알려드립니다.</p>
+                <div class="stat-boxes">
+                  <div class="stat-box">
+                    <span class="stat-num">1,600만+</span>
+                    <span class="stat-label">국민비서 가입자</span>
+                  </div>
+                  <div class="stat-box">
+                    <span class="stat-num">1억+</span>
+                    <span class="stat-label">알림 안내 발송</span>
+                  </div>
+                </div>
+                <a href="https://www.ips.go.kr" target="_blank" class="mini-btn">국민비서 구삐 만나기 &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: 지방자치 및 균형발전 -->
+        <div class="tab-panel" id="tab-local">
+          <div class="panel-inner">
+            <div class="panel-desc">
+              <span class="panel-tag">Local Era</span>
+              <h3>어디에 살아도 살기 좋은 대한민국</h3>
+              <p>지방소멸 위기를 극복하고, 주민이 직접 마을 정책에 참여하는 진정한 지방자치를 실현합니다. 청년이 머물고 싶은 활력 넘치는 지역을 만듭니다.</p>
+              
+              <div class="duty-features">
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="home"></i></div>
+                  <div>
+                    <h4>지방소멸대응기금 지원</h4>
+                    <p>인구감소지역을 위해 매년 1조 원 규모의 기금을 투입해 일자리 창출과 정주 여건을 대폭 개선합니다.</p>
+                  </div>
+                </div>
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="gift"></i></div>
+                  <div>
+                    <h4>고향사랑기부제</h4>
+                    <p>내가 응원하는 지자체에 기부하고 세액공제 혜택과 지역 특산품 답례품을 받는 상생 나눔 제도입니다.</p>
+                  </div>
+                </div>
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="users"></i></div>
+                  <div>
+                    <h4>주민자치회 활성화</h4>
+                    <p>주민이 직접 동네의 문제를 발굴하고 예산을 편성하는 풀뿌리 민주주의 정착을 돕습니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-visual">
+              <div class="visual-card local-theme">
+                <div class="visual-badge">상생 경제</div>
+                <h4>고향도 살리고 세금도 아끼는 고향사랑e음</h4>
+                <p>10만원 기부 시 10만원 전액 세액공제 + 3만원 상당의 답례품까지!</p>
+                <div class="stat-boxes">
+                  <div class="stat-box">
+                    <span class="stat-num">100%</span>
+                    <span class="stat-label">10만원 세액공제</span>
+                  </div>
+                  <div class="stat-box">
+                    <span class="stat-num">30%</span>
+                    <span class="stat-label">지역 특산 답례품</span>
+                  </div>
+                </div>
+                <a href="https://ilovegohyang.go.kr" target="_blank" class="mini-btn">고향사랑e음 기부하기 &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: 지방재정 및 지방세 -->
+        <div class="tab-panel" id="tab-finance">
+          <div class="panel-inner">
+            <div class="panel-desc">
+              <span class="panel-tag">Finance & Tax</span>
+              <h3>튼튼한 살림살이와 투명한 지방재정</h3>
+              <p>지역 주민 복지와 인프라 구축의 근간이 되는 지방세 제도를 합리적으로 설계하고, 지자체 재정이 낭비되지 않도록 재정 건전성을 관리합니다.</p>
+              
+              <div class="duty-features">
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="credit-card"></i></div>
+                  <div>
+                    <h4>위택스 (Wetax) 운영</h4>
+                    <p>취득세, 재산세, 자동차세 등 전국 모든 지방세를 은행 방문 없이 온라인으로 한 번에 조회하고 납부합니다.</p>
+                  </div>
+                </div>
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="trending-up"></i></div>
+                  <div>
+                    <h4>지방교부세 배분</h4>
+                    <p>재정 여건이 열악한 지자체에 재원을 균형 있게 배분하여 전국 어디서나 표준적인 공공서비스를 누릴 수 있게 합니다.</p>
+                  </div>
+                </div>
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="eye"></i></div>
+                  <div>
+                    <h4>지방재정365 공시</h4>
+                    <p>우리 동네 지자체 예산이 어디에 얼마나 쓰이는지 모든 국민에게 투명하게 공개합니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-visual">
+              <div class="visual-card finance-theme">
+                <div class="visual-badge">스마트 납부</div>
+                <h4>언제 어디서나 편리한 '위택스'</h4>
+                <p>스마트 위택스 앱으로 자동차세 연납 할인부터 환급금 신청까지 간편하게 관리하세요.</p>
+                <div class="stat-boxes">
+                  <div class="stat-box">
+                    <span class="stat-num">24시간</span>
+                    <span class="stat-label">비대면 수납 서비스</span>
+                  </div>
+                  <div class="stat-box">
+                    <span class="stat-num">100%</span>
+                    <span class="stat-label">전국 지자체 연계</span>
+                  </div>
+                </div>
+                <a href="https://www.wetax.go.kr" target="_blank" class="mini-btn">위택스 바로가기 &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: 정부조직 및 행정관리 -->
+        <div class="tab-panel" id="tab-org">
+          <div class="panel-inner">
+            <div class="panel-desc">
+              <span class="panel-tag">Government Innovation</span>
+              <h3>국민 중심의 유연하고 일 잘하는 정부</h3>
+              <p>정부 기관이 시대 변화에 맞춰 효율적으로 일할 수 있도록 정부 조직과 정원을 진단·재설계하고, 공공서비스의 품질을 높입니다.</p>
+              
+              <div class="duty-features">
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="building"></i></div>
+                  <div>
+                    <h4>정부 조직 및 정원 관리</h4>
+                    <p>국가 주요 과제 수행을 위해 중앙행정기관의 기능 중복을 없애고 조직을 유연하게 조정합니다.</p>
+                  </div>
+                </div>
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="file-check"></i></div>
+                  <div>
+                    <h4>행정제도 및 민원 서비스 혁신</h4>
+                    <p>불필요한 구비서류 감축, 민원 처리 기간 단축 등 국민의 불편을 덜어주는 제도 개선을 추진합니다.</p>
+                  </div>
+                </div>
+                <div class="duty-feat-item">
+                  <div class="feat-icon"><i data-lucide="flag"></i></div>
+                  <div>
+                    <h4>국가 상징 및 기념행사 주관</h4>
+                    <p>태극기, 애국가 등 국가상징물 보급과 3&middot;1절, 광복절 등 주요 국경일 및 정부 행사를 엄정히 주관합니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-visual">
+              <div class="visual-card org-theme">
+                <div class="visual-badge">원클릭 서비스</div>
+                <h4>국민이 체감하는 행정서식 간소화</h4>
+                <p>본인 정보 제공 동의 한 번으로 다른 기관 서류를 자동으로 확인하여 종이 서류 제출 부담을 없앱니다.</p>
+                <div class="stat-boxes">
+                  <div class="stat-box">
+                    <span class="stat-num">Zero</span>
+                    <span class="stat-label">불필요한 첨부서류</span>
+                  </div>
+                  <div class="stat-box">
+                    <span class="stat-num">1등</span>
+                    <span class="stat-label">UN 공공행정평가 선도</span>
+                  </div>
+                </div>
+                <a href="https://www.mois.go.kr/frt/sub/a06/b06/govInnovate/screen.do" target="_blank" class="mini-btn">정부혁신 사례보기 &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: 일반인을 위한 일상 속 서비스 (Citizen Services) -->
+  <section id="life-services" class="section services-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-badge">실생활 혜택</span>
+        <h2>우리의 하루 속에 행안부가 있어요!</h2>
+        <p>국민 여러분이 일상에서 가장 많이 마주치고 실제로 이용하는 대표 대표 서비스를 안내합니다.</p>
+      </div>
+
+      <div class="service-cards-grid" id="servicesContainer">
+        <!-- Card 1 -->
+        <div class="service-item-card" data-keyword="정부24 등본 초본 보조금 신청 민원 디지털">
+          <div class="service-icon"><i data-lucide="file-text"></i></div>
+          <div class="service-info">
+            <span class="service-cat">디지털 민원</span>
+            <h3>정부24 & 보조금24</h3>
+            <p>등·초본 무료 발급, 전입신고, 내가 받을 수 있는 정부 지원 혜택을 맞춤형으로 찾아줍니다.</p>
+          </div>
+          <div class="service-link">
+            <a href="https://www.gov.kr" target="_blank">gov.kr 방문하기 <i data-lucide="arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="service-item-card" data-keyword="안전신문고 재난 사고 위험 포트홀 불법주정차 안전">
+          <div class="service-icon"><i data-lucide="alert-triangle"></i></div>
+          <div class="service-info">
+            <span class="service-cat">생활 안전</span>
+            <h3>안전신문고</h3>
+            <p>도로 파손, 낙하 위험물, 불법주정차 등 생활 속 위험 요소를 스마트폰으로 찰칵 찍어 신고하세요.</p>
+          </div>
+          <div class="service-link">
+            <a href="https://www.safetyreport.go.kr" target="_blank">앱 다운로드 & 안내 <i data-lucide="arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="service-item-card" data-keyword="모바일 신분증 운전면허증 주민등록증 지갑 디지털">
+          <div class="service-icon"><i data-lucide="smartphone"></i></div>
+          <div class="service-info">
+            <span class="service-cat">스마트 신원확인</span>
+            <h3>모바일 신분증</h3>
+            <p>스마트폰에 쏙 들어간 운전면허증과 주민등록증! 온·오프라인 어디서나 실물 신분증과 동일한 법적 효력.</p>
+          </div>
+          <div class="service-link">
+            <a href="https://www.mobileid.go.kr" target="_blank">모바일 신분증 알아보기 <i data-lucide="arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="service-item-card" data-keyword="국민비서 구삐 알림 건강검진 과태료 교통 범칙금 알림톡">
+          <div class="service-icon"><i data-lucide="bell-ring"></i></div>
+          <div class="service-info">
+            <span class="service-cat">개인 맞춤 알림</span>
+            <h3>국민비서 (구삐)</h3>
+            <p>건강검진, 세금 고지, 운전면허 갱신일 등을 카카오톡이나 네이버 앱으로 미리 알려주는 개인 비서입니다.</p>
+          </div>
+          <div class="service-link">
+            <a href="https://www.ips.go.kr" target="_blank">알림 서비스 신청 <i data-lucide="arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="service-item-card" data-keyword="위택스 지방세 취득세 재산세 자동차세 세금 납부">
+          <div class="service-icon"><i data-lucide="credit-card"></i></div>
+          <div class="service-info">
+            <span class="service-cat">지방세 종합포털</span>
+            <h3>스마트 위택스 (Wetax)</h3>
+            <p>전국 지방세 조회, 자동차세 연납 할인 신청, 상하수도 요금 납부 등을 공인인증 없이 간편하게 납부합니다.</p>
+          </div>
+          <div class="service-link">
+            <a href="https://www.wetax.go.kr" target="_blank">위택스 바로가기 <i data-lucide="arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="service-item-card" data-keyword="고향사랑기부제 세액공제 특산품 답례품 지방 균형발전">
+          <div class="service-icon"><i data-lucide="gift"></i></div>
+          <div class="service-info">
+            <span class="service-cat">지방 활성화</span>
+            <h3>고향사랑e음</h3>
+            <p>원하는 고향에 기부하고 10만원 전액 세액공제 혜택과 다채로운 지역 특산품을 선물로 받아보세요.</p>
+          </div>
+          <div class="service-link">
+            <a href="https://ilovegohyang.go.kr" target="_blank">답례품 구경 & 기부 <i data-lucide="arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: 자주 묻는 질문 (FAQ) -->
+  <section id="faq" class="section faq-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-badge">궁금증 해결</span>
+        <h2>일반인이 가장 많이 궁금해하는 질문 (FAQ)</h2>
+        <p>행정안전부의 역할과 서비스에 대한 오해와 진실을 풀어드립니다.</p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q. 행정안전부와 경찰청, 소방청은 어떤 관계인가요?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-answer">
+            <p>경찰청과 소방청은 <strong>행정안전부의 소속청(외청)</strong>입니다. 치안과 소방 업무의 전문적인 집행은 각 청이 담당하며, 행정안전부는 이를 총괄 조정하고 국가적 중대 재난 시 종합적인 지휘·지원 체계를 가동합니다.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q. 주민등록등본을 무료로 인터넷 발급받으려면 어디로 가야 하나요?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-answer">
+            <p>행정안전부가 운영하는 <strong>정부24(www.gov.kr)</strong> 또는 정부24 모바일 앱을 이용하시면 24시간 언제 어디서나 수수료 없이 무료로 열람 및 PDF 출력/전자문서지갑 발급이 가능합니다.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q. 긴급재난문자는 왜 행정안전부 이름으로 오나요?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-answer">
+            <p>국가 재난관리 주무부처로서 지진, 태풍, 대형화재, 호우경보 등 인명·재산 피해가 우려되는 상황 발생 시 기상청 및 지자체와 연계하여 <strong>신속한 대피와 행동요령을 알리는 '재난문자방송 기준'을 행정안전부가 총괄 운영</strong>하기 때문입니다.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q. 모바일 신분증은 실물 신분증을 완전히 대체할 수 있나요?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-answer">
+            <p>네, 가능합니다! 도로교통법 및 주민등록법 등 관련 법령령에 의거하여 공공기관, 은행, 병원, 편의점, 공항(국내선 탑승) 등 실물 신분증이 쓰이는 모든 곳에서 동일한 법적 효력을 가집니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo-wrap">
+            <img src="mois_logo.png" alt="행정안전부 로고" class="footer-logo-img">
+            <span class="footer-logo">행정안전부 알리미</span>
+          </div>
+          <p>이 웹사이트는 행정안전부의 주요 공공 정책과 실생활 서비스를 국민에게 알기 쉽게 전달하기 위해 제작된 대국민 안내 포털입니다.</p>
+        </div>
+        <div class="footer-links">
+          <div class="link-group">
+            <h4>관련 공식 서비스</h4>
+            <ul>
+              <li><a href="https://www.mois.go.kr" target="_blank">행정안전부 공식홈페이지</a></li>
+              <li><a href="https://www.gov.kr" target="_blank">정부24 포털</a></li>
+              <li><a href="https://www.safetyreport.go.kr" target="_blank">안전신문고</a></li>
+              <li><a href="https://www.wetax.go.kr" target="_blank">위택스(지방세)</a></li>
+            </ul>
+          </div>
+          <div class="link-group">
+            <h4>대국민 안내창구</h4>
+            <ul>
+              <li><a href="https://ilovegohyang.go.kr" target="_blank">고향사랑e음</a></li>
+              <li><a href="https://www.ips.go.kr" target="_blank">국민비서 서비스</a></li>
+              <li><a href="https://www.mobileid.go.kr" target="_blank">모바일 신분증</a></li>
+              <li><a href="https://www.safekorea.go.kr" target="_blank">국민재난안전포털</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 대한민국 행정안전부 대국민 안내 포털 (MOIS Citizen Portal). All rights reserved.</p>
+        <p class="call-center">정부민원안내 콜센터 : 국번없이 <strong>110</strong> | 행정안전부 콜센터 : <strong>02-2100-3399</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
